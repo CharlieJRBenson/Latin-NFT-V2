@@ -13,7 +13,7 @@ const mint = () => {
 	const [txnHash, setTxnHash] = useState(null)
 	const [miningStatus, setMiningStatus] = useState(-1)
 	const [loadingState, setLoadingState] = useState(0)
-	const [txError, setTxError] = useState(null)
+	const [txError, setTxError] = useState("")
 	const [currentAccount, setCurrentAccount] = useState('')
 	const [correctNetwork, setCorrectNetwork] = useState(false)
 
@@ -119,13 +119,20 @@ const mint = () => {
 				console.log("Ethereum object doesn't exist!")
 			}
 		} catch (error) {
-			console.log('Error minting character', error)
-			setTxError(error.message)
+			
+
+			if (error instanceof Error) {
+				// TypeScript knows err is Error
+				console.log('Error minting character', error)
+				setTxError(error.message)
+			} else {
+				console.log('Unexpected error', error);
+			}
 		}
 	}
 
 	// Gets the minted NFT data
-	const getMintedNFT = async (tokenId) => {
+	const getMintedNFT = async (tokenId: any) => {
 		try {
 			const { ethereum } = window
 
@@ -149,8 +156,13 @@ const mint = () => {
 				console.log("Ethereum object doesn't exist!")
 			}
 		} catch (error) {
-			console.log(error)
-			setTxError(error.message)
+			if (error instanceof Error) {
+				// TypeScript knows err is Error
+				console.log(error)
+				setTxError(error.message)
+			} else {
+				console.log('Unexpected error', error);
+			}			
 		}
 	}
 

@@ -2,5 +2,6 @@
 ## [View Minting Site Here](https://latin-nft.vercel.app/)
 ## [View NFT Collection Here](https://testnets.opensea.io/collection/latinnft)
 Project created using Nomiclabs Hardhat, Ethers, Waffle, Chai, OpenZeppelin/Contracts.
+Rinkeby Testnet
 
 ![Demo Screen Shot](https://github.com/CharlieJRBenson/Latin-NFT/blob/master/demo-screenshot.png)

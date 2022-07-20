@@ -5,6 +5,9 @@ import axios from 'axios'
 
 import NFT from '../utils/lnft.json'
 
+declare var window: any
+
+
 const mint = () => {
 	const [mintedNFT, setMintedNFT] = useState(null)
 	const [txnHash, setTxnHash] = useState(null)

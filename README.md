@@ -1,13 +1,6 @@
-# Sample Hardhat Project
+# Latin NFT Minting Site & Hardhat Contract Development/Test/Deployment
+## [View Demo Minting Site Here](https://latin-nft.vercel.app/)
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+Project created using Nomiclabs Hardhat, Ethers, Waffle, Chai, OpenZeppelin/Contracts.
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+![Demo Screen Shot](https://github.com/CharlieJRBenson/Latin-NFT/demo-screenshot.png)

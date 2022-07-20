@@ -3,4 +3,4 @@
 
 Project created using Nomiclabs Hardhat, Ethers, Waffle, Chai, OpenZeppelin/Contracts.
 
-![Demo Screen Shot](https://github.com/CharlieJRBenson/Latin-NFT/demo-screenshot.png)
+![Demo Screen Shot](https://github.com/CharlieJRBenson/Latin-NFT/blob/master/demo-screenshot.png)

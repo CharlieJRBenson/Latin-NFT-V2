@@ -9,7 +9,7 @@ declare var window: any
 
 
 const mint = () => {
-	const [mintedNFT, setMintedNFT] = useState(null)
+	const [mintedNFT, setMintedNFT] = useState("")
 	const [txnHash, setTxnHash] = useState(null)
 	const [miningStatus, setMiningStatus] = useState(-1)
 	const [loadingState, setLoadingState] = useState(0)

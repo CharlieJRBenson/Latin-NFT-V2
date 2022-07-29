@@ -23,14 +23,14 @@ describe('lnft Contract', async () => {
 		// Returns the name of the token
     const name = await nft.collectionName();
 
-    assert.equal(name, 'LatinNFT');
+    assert.equal(name, 'LatinNFT_V2');
 	})
 
 	it('Should have a symbol', async () => {
 		// Returns the symbol of the token
     const symbol = await nft.collectionSymbol();
 
-    assert.equal(symbol, 'LAT');
+    assert.equal(symbol, 'LNFT2');
 	})
 
 	it('Should be able to mint NFT', async () => {

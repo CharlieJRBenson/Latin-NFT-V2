@@ -255,7 +255,7 @@ const mint = () => {
 					<br></br>
 					
 					<a
-						href={`https://testnets.opensea.io/collection/latinnft`}
+						href={`https://testnets.opensea.io/collection/latinnft-v2`}
 						target='_blank'
 					>
 						<span className='hover:underline hover:underline-offset-8 '>

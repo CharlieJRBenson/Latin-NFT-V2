@@ -8,9 +8,9 @@ import { Base64 } from "./libraries/Base64.sol";
 
 contract lnft is ERC721URIStorage {
   using Counters for Counters.Counter;
+  Counters.Counter private _nonce;
   Counters.Counter private _tokenId;
-  Counters.Counter public _tokenTotal;
-
+  Counters.Counter public tokenTotal;
 
   string public collectionName;
   string public collectionSymbol;
@@ -19,13 +19,15 @@ contract lnft is ERC721URIStorage {
   string svgPartOne = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: sans-serif; font-size: 18px; }</style><rect width='100%' height='100%' fill='";
   string svgPartTwo = "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
-  string [] firstWords = ["callide", "infula", "gratulor", "optimates", "paratus", "quemadmodum", "invado", "dimidium", "indagatio", "perpetuus"];
-  string[] secondWords = ["audax", "curia", "nonnisi", "curiosus", "inclino", "munitio", "super", "vestis", "vorago", "quatinus", "inventor", "protesto", "appono", "cuius", "decorus", "pactus"];
-  string[] thirdWords = ["sonitus", "certus", "audeo", "conspicio", "degenero", "lacrimosus", "infirmatio", "mansuetus", "oportunitas", "pecunia", "prolecto", "regina", "sapiens", "satura", "esurio"];
+  string[] firstWords = ["callide", "infula", "gratulor", "optimates", "paratus", "quemadmodum", "invado", "dimidium", "indagatio", "perpetuus"];
+  string[] secondWords = ["audax", "curia", "nonnisi", "curiosus", "inclino", "munitio", "super", "vestis", "vorago", "quatinus"];
+  string[] thirdWords = ["sonitus", "certus", "audeo", "conspicio", "degenero", "lacrimosus", "infirmatio", "mansuetus", "oportunitas", "pecunia"];
+  string[] fourthWords = ["appono", "cuius", "decorus", "pactus","regina", "sapiens", "satura", "esurio","inventor", "protesto"];
+
   string[] colors = ["#2a324b", "#d81159", "#bfb1c1", "#b5bec6", "#c7dbe6"];
 
 
-  constructor() ERC721("LatinNFT", "LAT") {
+  constructor() ERC721("LatinNFT_V2", "LNFT2") {
     collectionName = name();
     collectionSymbol = symbol();
   }
@@ -33,12 +35,13 @@ contract lnft is ERC721URIStorage {
   function createlnft() public returns(uint256) {
     uint256 newItemId = _tokenId.current();
 
-    string memory first = pickRandomFirstWord(newItemId);
-    string memory second = pickRandomSecondWord(newItemId);
-    string memory third = pickRandomThirdWord(newItemId);
-    string memory combinedWord = string(abi.encodePacked(first, ' ',  second, ' ', third));
+    string memory first = _pickRandom(firstWords,newItemId, "FIRST_WORD");
+    string memory second = _pickRandom(secondWords,newItemId, "SECOND_WORD");
+    string memory third = _pickRandom(thirdWords,newItemId, "THIRD_WORD");
+    string memory forth = _pickRandom(fourthWords,newItemId, "FORTH_WORD");
+    string memory combinedWord = string(abi.encodePacked(first, ' ',  second, ' ', third, ' ', forth));
 
-    string memory randomColor = pickRandomColor(newItemId);
+    string memory randomColor = _pickRandom(colors,newItemId, "COLOURS");
     string memory finalSvg = string(abi.encodePacked(svgPartOne, randomColor, svgPartTwo, combinedWord, "</text></svg>"));
 
     string memory json = Base64.encode(
@@ -67,45 +70,30 @@ contract lnft is ERC721URIStorage {
     // Increment the counter for when the next NFT is minted
     _tokenId.increment();
     // Increment the total when the next is minted
-    _tokenTotal.increment();
+    tokenTotal.increment();
 
     return newItemId;
 
     }
 
     function getTotalNFTsMintedSoFar() public view returns (uint) {
-        return _tokenTotal.current();
+        return tokenTotal.current();
     }
     
-  function pickRandomFirstWord(uint256 tokenId) private view returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked("FIRST_WORD", Strings.toString(tokenId))));
+  
+
+  function _pickRandom(string[] memory input, uint256 tokenId, string memory key) private returns (string memory) {
+    uint256 localNonce = _nonce.current();
+    uint256 rand = random(string(abi.encodePacked(localNonce, block.timestamp, key, Strings.toString(tokenId))));
     rand = rand % firstWords.length;
-    return firstWords[rand];
-  }
+   
+    _nonce.increment();
 
-  function pickRandomSecondWord(uint256 tokenId) private view returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked("SECOND_WORD", Strings.toString(tokenId))));
-    rand = rand % secondWords.length;
-    return secondWords[rand];
-  }
-
-  function pickRandomThirdWord(uint256 tokenId) private view returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked("THIRD_WORD", Strings.toString(tokenId))));
-    rand = rand % thirdWords.length;
-    return thirdWords[rand];
-  }
-
-  function pickRandomColor(uint256 tokenId) private view returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked("COLOR", Strings.toString(tokenId))));
-    rand = rand % colors.length;
-    return colors[rand];
-  }
+    return input[rand];
+  } 
 
   function random(string memory input) internal pure returns (uint256) {
     return uint256(keccak256(abi.encodePacked(input)));
   }
-
-
-
 
 }

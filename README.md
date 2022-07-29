@@ -1,6 +1,6 @@
 # Latin NFT Minting Site & Hardhat Ethers Solidity Contract Development/Test/Deployment
-## [View Minting Site Here](https://latin-nft.vercel.app/)
-## [View NFT Collection Here](https://testnets.opensea.io/collection/latinnft)
+## [View Minting Site Here](https://latin-nft-v2.vercel.app/)
+## [View NFT Collection Here](https://testnets.opensea.io/collection/latinnft-v2)
 Project created using Nomiclabs Hardhat, Ethers, Waffle, Chai, OpenZeppelin/Contracts.
 
 Built on Rinkeby Testnet
